@@ -1,0 +1,40 @@
+{
+  "name": "new-eagle-eye",
+  "version": "1.0.5",
+  "description": "eagle eye for webpages",
+  "main": "lib/eagle-eye.min.js",
+  "scripts": {
+    "dev": "NODE_ENV=development webpack serve",
+    "build": "rm -rf lib && NODE_ENV=production webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eniumeng/eagle-eye.git"
+  },
+  "keywords": [
+    "javascript",
+    "webpage",
+    "eagle",
+    "eye"
+  ],
+  "author": "niumeng",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eniumeng/eagle-eye/issues"
+  },
+  "homepage": "https://github.com/eniumeng/eagle-eye#readme",
+  "devDependencies": {
+    "css-loader": "^5.2.0",
+    "html-webpack-plugin": "^5.3.1",
+    "sass": "^1.32.8",
+    "sass-loader": "^11.0.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.30.0",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "html2canvas": "^1.0.0-rc.7",
+    "new-eagle-eye": "^1.0.2"
+  }
+}

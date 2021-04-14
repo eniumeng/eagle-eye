@@ -1,0 +1,100 @@
+.eagle-eye-ctn {
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 60px;
+  right: 60px;
+  width: 236px;
+  height: 148px;
+  padding: 10px;
+  background-color: rgba(61, 61, 61, 0.4);
+  overflow: hidden;
+
+  img {
+    width: 216px;
+    height: 128px;
+    object-fit: contain;
+  }
+
+  .folder {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background: rgba(42, 48, 60, 0.6);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .unfolder {
+    display: none;
+  }
+
+  &.minimal {
+    box-sizing: border-box;
+    bottom: 24px;
+    right: 24px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #EAEDF9;
+    background-color: #FFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    .folder {
+      display: none;
+    }
+
+    .unfolder {
+      display: block;
+      width: 18px;
+      height: 12px;
+      border: 2px solid #2B2F36;
+      box-sizing: border-box;
+      border-radius: 0.5px;
+    }
+
+    img {
+      display: none;
+    }
+  }
+}
+
+#temp-canvas-ctn {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  top: -1px;
+  left: -1px;
+  z-index: -1;
+}
+
+.scope-ctn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+
+  .scope-position-marking {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    box-sizing: border-box;
+    border: 1px solid red;
+  }
+
+  .scope-selector {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
