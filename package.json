@@ -4,7 +4,7 @@
   "description": "eagle eye for webpages",
   "main": "lib/eagle-eye.min.js",
   "scripts": {
-    "dev": "NODE_ENV=development webpack serve",
+    "serve": "NODE_ENV=development webpack serve",
     "build": "rm -rf lib && NODE_ENV=production webpack"
   },
   "repository": {

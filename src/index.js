@@ -1,10 +1,11 @@
 import html2canvas from 'html2canvas'
+import { debounce, throttle } from './utils'
 import './index.scss'
 
-const pageWidth = document.body.scrollWidth
-const pageHeight = document.body.scrollHeight
-const clientWidth = window.innerWidth
-const clientHeight = window.innerHeight
+let pageWidth = document.body.scrollWidth
+let pageHeight = document.body.scrollHeight
+let clientWidth = window.innerWidth
+let clientHeight = window.innerHeight
 
 let eagleEyeEle = null
 let tempCanvasCtnEle = null
@@ -31,9 +32,16 @@ function renderAssemblyUnit() {
         <div id="scope-position-marking" class="scope-position-marking"></div>
         <div id="scope-selector" class="scope-selector"></div>
       </div>
+      <div id="temp-canvas-ctn" data-html2canvas-ignore></div>
     </div>
-    <div id="temp-canvas-ctn" data-html2canvas-ignore></div>
   `)
+}
+
+function setEnvParams () {
+  pageWidth = document.body.scrollWidth
+  pageHeight = document.body.scrollHeight
+  clientWidth = window.innerWidth
+  clientHeight = window.innerHeight
 }
 
 function getElements () {
@@ -51,25 +59,19 @@ function setSelector () {
 
     scopeCtnEle.style.width = scopeCtnEleWidth + 'px'
     scopeCtnEle.style.height = scopeCtnEleHeight + 'px'
-
-    scopePositionMarkingEleWidth = 10
-    scopePositionMarkingEleHeight = clientHeight * 10 / clientWidth
-
-    scopePositionMarkingEle.style.width = scopePositionMarkingEleWidth + 'px'
-    scopePositionMarkingEle.style.height = scopePositionMarkingEleHeight + 'px'
   } else {
     scopeCtnEleHeight = 128
     scopeCtnEleWidth = pageWidth * 128 / pageHeight
 
     scopeCtnEle.style.height = scopeCtnEleHeight + 'px'
     scopeCtnEle.style.width = scopeCtnEleWidth + 'px'
-
-    scopePositionMarkingEleHeight = 10
-    scopePositionMarkingEleWidth = clientHeight * 10 / clientWidth
-
-    scopePositionMarkingEle.style.height = scopePositionMarkingEleHeight + 'px'
-    scopePositionMarkingEle.style.width = scopePositionMarkingEleWidth + 'px'
   }
+
+  scopePositionMarkingEleWidth = clientWidth * scopeCtnEleWidth / pageWidth
+  scopePositionMarkingEleHeight = clientHeight * scopeCtnEleHeight / pageHeight
+
+  scopePositionMarkingEle.style.height = scopePositionMarkingEleHeight + 'px'
+  scopePositionMarkingEle.style.width = scopePositionMarkingEleWidth + 'px'
 }
 
 function renderhumbnail () {
@@ -85,14 +87,30 @@ function renderhumbnail () {
 
     img.src = imgSrc
 
+    const existImg = eagleEyeEle.querySelector('img')
+
+    if (existImg) {
+      eagleEyeEle.removeChild(existImg)
+    }
+
     eagleEyeEle.appendChild(img)
   })
+}
+
+function bindWindowResizeEvent () {
+  window.addEventListener('resize', debounce(() => {
+    setEnvParams()
+    setSelector()
+    renderhumbnail()
+  }, 3000))
 }
 
 function bindFolderEvent () {
   eagleEyeEle.addEventListener('click', function () {
     if (this.classList.contains('minimal')) {
       this.classList.remove('minimal')
+
+      scopeCtnEle.style.display = 'block'
     }
   })
 
@@ -100,6 +118,8 @@ function bindFolderEvent () {
     e.stopPropagation()
 
     eagleEyeEle.classList.add('minimal')
+
+    scopeCtnEle.style.display = 'none'
   })
 }
 
@@ -155,6 +175,7 @@ export function init ({
     return
   }
 
+  setEnvParams()
   renderAssemblyUnit()
   getElements()
   setSelector()
@@ -163,6 +184,7 @@ export function init ({
   positeScopeSelector()
   bindPageScrollEvent()
   bindRepositePageEvent()
+  bindWindowResizeEvent()
 }
 
 export default {
