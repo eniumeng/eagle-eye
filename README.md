@@ -12,7 +12,7 @@
     npm install --save new-eagle-eye
     ```
 
-    step 2: use debug, info, log, warn or error method of crayon when necessary:
+    step 2: use:
 
     ```javascript
     import eagleEye from 'new-eagle-eye'
