@@ -1,13 +1,12 @@
 {
   "name": "new-eagle-eye",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "eagle eye for webpages",
   "main": "lib/eagle-eye.min.js",
   "scripts": {
     "serve": "NODE_ENV=development webpack serve",
     "build": "rm -rf lib && NODE_ENV=production webpack",
-    "update": "node build/update-version.js",
-    "upload": "node build/upload-npm.js && node build/upload-git.js"
+    "upload": "node build/update-version.js && node build/upload-npm.js && node build/upload-git.js"
   },
   "repository": {
     "type": "git",
