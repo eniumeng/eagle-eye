@@ -2,10 +2,10 @@ import html2canvas from 'html2canvas'
 import { debounce, throttle } from './utils'
 import './index.scss'
 
-let pageWidth = document.body.scrollWidth
-let pageHeight = document.body.scrollHeight
-let clientWidth = window.innerWidth
-let clientHeight = window.innerHeight
+let pageWidth = 0
+let pageHeight = 0
+let clientWidth = 0
+let clientHeight = 0
 
 let eagleEyeEle = null
 let tempCanvasCtnEle = null
@@ -74,7 +74,7 @@ function setSelector () {
   scopePositionMarkingEle.style.width = scopePositionMarkingEleWidth + 'px'
 }
 
-function renderhumbnail () {
+function renderThumbnail () {
   html2canvas(document.body, {
     width: pageWidth,
     height: pageHeight
@@ -101,7 +101,7 @@ function bindWindowResizeEvent () {
   window.addEventListener('resize', debounce(() => {
     setEnvParams()
     setSelector()
-    renderhumbnail()
+    renderThumbnail()
   }, 3000))
 }
 
@@ -179,7 +179,7 @@ export function init ({
   renderAssemblyUnit()
   getElements()
   setSelector()
-  renderhumbnail()
+  renderThumbnail()
   bindFolderEvent()
   positeScopeSelector()
   bindPageScrollEvent()
