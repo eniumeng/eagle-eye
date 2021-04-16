@@ -102,7 +102,7 @@ function bindWindowResizeEvent () {
     setEnvParams()
     setSelector()
     renderThumbnail()
-  }, 3000))
+  }, 500))
 }
 
 function bindFolderEvent () {
