@@ -98,11 +98,7 @@ function renderThumbnail () {
 }
 
 function bindWindowResizeEvent () {
-  window.addEventListener('resize', debounce(() => {
-    setEnvParams()
-    setSelector()
-    renderThumbnail()
-  }, 500))
+  window.addEventListener('resize', debounce(reRender, 500))
 }
 
 function bindFolderEvent () {
@@ -187,6 +183,13 @@ export function init ({
   bindWindowResizeEvent()
 }
 
+export function reRender () {
+  setEnvParams()
+  setSelector()
+  renderThumbnail()
+}
+
 export default {
-  init
+  init,
+  reRender
 }

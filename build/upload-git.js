@@ -5,6 +5,4 @@ const commitMsg = readLineSync.question('commit message：', {
   defaultInput: ''
 })
 
-execCmd('git add .')
-execCmd(`git commit -m "${commitMsg}"`)
-execCmd('git push origin master')
+execCmd(`git add . && git commit -m "${commitMsg}" && git push origin master`)
